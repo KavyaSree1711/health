@@ -17,7 +17,7 @@ summary_kpis <- df %>%
   )
 print(summary_kpis)
 
-# 📈 Cases Over Time by Disease
+#Cases Over Time by Disease
 cases_over_time <- df %>%
   group_by(date, disease) %>%
   summarise(cases = sum(cases), .groups = "drop")
@@ -27,10 +27,10 @@ fig_cases <- ggplot(cases_over_time, aes(x = date, y = cases, color = disease)) 
   labs(title = "Cases Over Time", x = "Date", y = "Cases") +
   theme_minimal()
 
-print("📊 Cases Over Time:")
+print("Cases Over Time:")
 ggplotly(fig_cases)
 
-# 🧭 Top 10 Locations by Deaths
+# Top 10 Locations by Deaths
 top_deaths <- df %>%
   group_by(location) %>%
   summarise(deaths = sum(deaths), .groups = "drop") %>%
@@ -43,10 +43,10 @@ fig_deaths <- ggplot(top_deaths, aes(x = reorder(location, deaths), y = deaths))
   labs(title = "Top 10 Locations by Deaths", x = "Location", y = "Deaths") +
   theme_minimal()
 
-print("📍 Top Locations by Deaths:")
+print("Top Locations by Deaths:")
 ggplotly(fig_deaths)
 
-# 🧓 Hospitalizations by Age Group (Pie)
+# Hospitalizations by Age Group (Pie)
 hosp_by_age <- df %>%
   group_by(age_group) %>%
   summarise(hospitalizations = sum(hospitalizations), .groups = "drop")
@@ -54,7 +54,7 @@ hosp_by_age <- df %>%
 fig_pie <- plot_ly(hosp_by_age, labels = ~age_group, values = ~hospitalizations, type = 'pie') %>%
   layout(title = "Hospitalizations by Age Group")
 
-print("🍰 Hospitalizations by Age Group:")
+print("Hospitalizations by Age Group:")
 fig_pie
 
 # ⚥ Gender-Disease Breakdown
@@ -67,5 +67,5 @@ fig_gender <- ggplot(gender_cases, aes(x = disease, y = cases, fill = gender)) +
   labs(title = "Cases by Gender and Disease", x = "Disease", y = "Cases") +
   theme_minimal()
 
-print("⚖️ Cases by Gender and Disease:")
+print("Cases by Gender and Disease:")
 ggplotly(fig_gender)
